@@ -1,0 +1,126 @@
+﻿@model ScreeningTesterWebSite.Models.NewApplicantOutput
+
+<div class="col-md-12">
+    <h3>@Model.QuestionFlowDescription</h3>
+    @using (Html.BeginForm("NextQuestionsPage_route", "PWSFullScreening", FormMethod.Post))
+    {
+        <form>
+            @{
+                if (Model.ReturnedErrorText != null)
+                {
+                    @Html.Label(Model.ReturnedErrorText, "Error Message = " + Server.HtmlEncode(Model.ReturnedErrorText))<br />
+                }
+                else
+                {
+                    <p>
+                        @Html.HiddenFor(model => Model.UserName)
+                        @Html.HiddenFor(model => Model.UserPW)
+                        @Html.HiddenFor(model => Model.CoID)
+                        @Html.HiddenFor(model => Model.LoID)
+                        @Html.HiddenFor(model => Model.EnvironCode)
+                        @Html.HiddenFor(model => Model.EmID)
+                        @Html.HiddenFor(model => Model.LanguageID)
+
+                        @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+                        @Html.Label("Language: " + Model.LanguageDescription)<br />
+                        @Html.Label("CoID: " + Model.CoID)<br />
+                        @Html.Label("LoID: " + Model.LoID)<br />
+                        @Html.Label("EmId = " + Server.HtmlEncode(Model.EmID))
+                    </p>
+
+                    <P></P>
+                    if (Model?.questions == null || Model.questions.Count < 1)
+                    {
+                        @Html.Label("No Questions")
+                    }
+                    else
+                    {
+                        for (int i = 0; i < Model.questions.Count; i++)
+                        {
+                            if (!String.IsNullOrEmpty(Model.questions[i].previousanswer))
+                            {
+                                Model.questions[i].answervalue = Model.questions[i].previousanswer;
+                            }
+
+                            @Html.Label(Model.questions[i].text, Model.questions[i].text)<br />
+                            @Html.TextBoxFor(x => Model.questions[i].answervalue) 
+                            @Html.Label(" Question ID: " + Server.HtmlEncode(Model.questions[i].id))
+                            @Html.Label(", Question Type: " + Server.HtmlEncode(Model.questions[i].answertype))<br />
+                            @Html.Label("Is Required flag: " + Model.questions[i].isrequired)
+                            @Html.Label(", Can Skip flag: " + Model.questions[i].canskip)<br />
+                            @Html.Label("Previous Answer: " + Model.questions[i].previousanswer)
+                            @Html.HiddenFor(x => Model.questions[i].id)
+
+                            if (Model.questions[i]?.validvaluelist != null)
+                            {
+                                foreach (string validval in Model.questions[i].validvaluelist)
+                                {
+                                <br />
+                                @Html.Label(validval, "Valid Answer = " + Server.HtmlEncode(validval))
+                                }
+                            }
+                            <p></p>
+                        }
+                        <p></p>
+                        for (int ctr2 = 0; ctr2 < Model.QuestionNotes.Count; ctr2++)
+                        {
+                            @Html.Label(Model.QuestionNotes[ctr2]);
+                            <br />
+                        }
+                    }
+                    <p></p>
+
+                    int ctr = 0;
+                    if (Model?.statuses == null || Model.statuses.Count < 1)
+                    {
+                        @Html.Label("No Status returned")
+                    }
+                    else
+                    {
+                        foreach (var stat in Model.statuses)
+                        {
+                            @Html.Label("Status " + ctr.ToString())<br />
+                            @Html.Label("Process Step = " + stat.processstep)<br />
+                            @Html.Label("Status = " + stat.statuscode)<P></P>
+                            ctr++;
+                        }
+                    }
+                    <P></P>
+
+                    ctr = 0;
+                    if (Model?.credits == null || Model.credits.Count == 0)
+                    {
+                        @Html.Label("No Credits returned")
+                    }
+                    else
+                    {
+                        foreach (var crdt in Model.credits)
+                        {
+                            @Html.Label("Credit " + ctr.ToString())<br />
+                            @Html.Label("Credit Type = " + crdt.credittype)<br />
+                            @Html.Label("qualified = " + crdt.qualified)<P></P>
+                            ctr++;
+                        }
+                    }
+                    <p></p>
+                    if (Model?.questions != null && Model.questions.Count > 0 && Model.EnvironCode.Substring(0,1) == "A")
+                    {
+                        <p>
+                            <input type="submit" name="prevbutton" value="Back"> &nbsp;
+                            <input type="submit" name="nextbutton" value="Next">
+                        </p>
+                    }
+                    else if (Model?.questions != null && Model.questions.Count > 0)
+                    {
+                        <p>
+                            <input type="submit" name="nextbutton" value="Next">
+                        </p>
+                    }
+                }
+            }
+        </form>
+    }
+    @Html.Partial("_Btn_BackToWelcomePage")
+    @Html.Partial("_Btn_BackToHomePage")
+</div>
+

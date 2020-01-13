@@ -1,0 +1,10 @@
+﻿@model ScreeningTesterWebSite.Models.NewApplicantOutput
+
+@{
+    ViewBag.Title = Model.QuestionFlowDescription;
+}
+<body>
+    @{
+        Html.RenderPartial("_Questions_LastPage", this.Model);
+    }
+</body>

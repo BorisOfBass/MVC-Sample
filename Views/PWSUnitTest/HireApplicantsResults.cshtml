@@ -1,0 +1,67 @@
+﻿@model ScreeningTesterWebSite.Models.HireApplicantsOutput
+
+@{
+    ViewBag.Title = "HireApplicants Results";
+}
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+    @{
+        @Html.HiddenFor(model => Model.LanguageID)
+
+        @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+        @Html.Label("Language: " + Model.LanguageDescription)<br />
+        @Html.Label("CoID: " + Model.CoID)<br />
+        @Html.Label("LoID: " + Model.LoID)<br />
+        if (Model.EmID != null)
+        {
+            @Html.Label("EmID (id) = " + Server.HtmlEncode(Model.EmID))<br />
+        }
+        if (Model.CandidateID != null)
+        {
+            @Html.Label("CandidateID (externalid) = " + Server.HtmlEncode(Model.CandidateID))<br />
+        }
+
+        if (Model.ReturnedErrorText != null)
+        {
+            @Html.Label(Model.ReturnedErrorText, "Error Message = " + Server.HtmlEncode(Model.ReturnedErrorText))<br />          
+        }
+        else
+        {
+            Int32 ctr = 0;
+            if (Model.statuses.Count == 0)
+            {
+                @Html.Label("No Status returned")
+            }
+            else
+            {
+                foreach (var stat in Model.statuses)
+                {
+                    @Html.Label("Status " + ctr.ToString())<br />
+                    @Html.Label("Process Step = " + stat.processstep)<br />
+                    @Html.Label("Status = " + stat.statuscode)<P></P>
+                    ctr++;
+                }
+            }
+            <P></P>
+            ctr = 0;
+            if (Model.credits.Count == 0)
+            {
+                @Html.Label("No Credits")
+            }
+            else
+            {
+                foreach (var crdt in Model.credits)
+                {
+                    @Html.Label("Credit " + ctr.ToString())<br />
+                    @Html.Label("Credit Type = " + crdt.credittype)<br />
+                    @Html.Label("qualified = " + crdt.qualified)<P></P>
+                    ctr++;
+                }
+            }
+        }
+        <p>&nbsp;</p>     
+       @Html.Partial("_Btn_BackToUnitMainPage")
+       @Html.Partial("_Btn_BackToHomePage")
+    }
+</div>

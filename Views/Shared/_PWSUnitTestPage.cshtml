@@ -1,0 +1,235 @@
+﻿@model ScreeningTesterWebSite.Models.InputFrontPage
+
+@{
+    ViewBag.Title = "Partner Web Service / Web API Unit Test Page";
+}
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+    @using (Html.BeginForm("InitializeQuestionnaireSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+        @Html.Label("Language: " + Model.LanguageDescription)<br />
+        @Html.Label("CoID: " + Model.CoID)<br />
+        @Html.Label("LoID: " + Model.LoID)
+
+        if (Model.EnvironCode.Substring(0, 1) != "I")
+        {
+        <form>
+            <div>
+                <p>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+                </p>
+                <button type="submit">Initialize Questionnaire</button>
+            </div>
+            <p></p>
+        </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetApplicantStatusSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) == "A")
+        {
+        <form>
+            <div>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.CoID)
+                @Html.HiddenFor(model => Model.LoID)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.LanguageID)
+                <button type="submit">Get Applicant Status</button>
+            </div>
+            <p></p>
+        </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("NewApplicantSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) != "I")
+        {
+        <form>
+            <div>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.CoID)
+                @Html.HiddenFor(model => Model.LoID)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.LanguageID)
+                <button type="submit">New Applicant</button>
+            </div>
+            <p></p>
+        </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("PostAnswersSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) != "I")
+        {
+        <form>
+            <div>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.CoID)
+                @Html.HiddenFor(model => Model.LoID)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.LanguageID)
+                <button type="submit">Post Answers</button>
+            </div>
+            <p></p>
+        </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetLastPageOfQuestionsSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) == "A")
+        {
+        <form>
+            <div>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.CoID)
+                @Html.HiddenFor(model => Model.LoID)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.LanguageID)
+                <button type="submit">Get Last Page Of Questions</button>
+            </div>
+            <p></p>
+        </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetLastQuestionsSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) == "A")
+        {
+        <form>
+            <div>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.CoID)
+                @Html.HiddenFor(model => Model.LoID)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.LanguageID)
+                <button type="submit">Get Last Questions</button>
+            </div>
+            <p></p>
+        </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("HireApplicantsSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) != "I")
+        {
+        <form>
+            <div>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.CoID)
+                @Html.HiddenFor(model => Model.LoID)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.LanguageID)
+                <button type="submit">Hire Applicants</button>
+            </div>
+        </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetCompanyByPhoneNumberSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) == "I" && false) // This endpoint has been deprecated
+        {
+            <form>
+                <div>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+                    <button type="submit">Get Company By Phone Number</button>
+                </div>
+                <p></p>
+            </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("GetCompanyByCodeSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) == "I")
+        {
+            <form>
+                <div>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+                    <button type="submit">Get Company By Code</button>
+                </div>
+                <p></p>
+            </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("IVRNewApplicantSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) == "I")
+        {
+            <form>
+                <div>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+                    <button type="submit">IVR New Applicant</button>
+                </div>
+                <p></p>
+            </form>
+        }
+    }
+</div>
+<div class="col-md-12">
+    @using (Html.BeginForm("IVRPostAnswersSetUp", "PWSUnitTest", FormMethod.Post))
+    {
+        if (Model.EnvironCode.Substring(0, 1) == "I")
+        {
+            <form>
+                <div>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+                    <button type="submit">IVR Post Answers</button>
+                </div>
+            </form>
+        }
+    }
+</div>
+
+<p>&nbsp;</p>
+@Html.Partial("_Btn_BackToHomePage")

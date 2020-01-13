@@ -1,0 +1,117 @@
+﻿@model ScreeningTesterWebSite.Models.IVRNewApplicantOutput
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+    @{
+        if (Model.ReturnedErrorText != null)
+        {
+            @Html.Label(Model.ReturnedErrorText, "Error Message = " + Server.HtmlEncode(Model.ReturnedErrorText))<br />
+        }
+        else
+        {
+            <p>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.CoID)
+                @Html.HiddenFor(model => Model.LoID)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.EmID)
+                @Html.HiddenFor(model => Model.CandidateID)
+                @Html.HiddenFor(model => Model.LanguageID)
+
+                @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+                @Html.Label("Language: " + Model.LanguageDescription)<br />
+                @Html.Label("CoID: " + Model.CoID)<br />
+                @Html.Label("LoID: " + Model.LoID)<br />
+                @Html.Label("ExternalID = " + Model.CandidateID)
+            </p>
+            if (Model?.redirecturl != null && Model.redirecturl.Length > 0)
+            {
+                <p>
+                    @Html.Label("Redirect URL: ")<br />
+                    @Html.Encode(Model.redirecturl)<br />
+                    <a href="@Model.redirecturl" target="_blank">CSR App</a>
+                </p>
+            }
+            else
+            {
+                <p>
+                    @Html.Label("Redirect URL: NONE")
+                </p>
+            }
+            <p>
+                @Html.Label("Recording File: ")<br />
+                @Html.Encode(Model.recordingfile)
+            </p>
+            if (Model?.recordingfile != null && Model.recordingfile.Length > 0)
+            {
+                <p>
+                    <audio controls>
+                        <source src="@Model.recordingfile" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </p>
+            }
+            <p></p>
+            if (Model?.question == null)
+            {
+                @Html.Label("No Questions")
+            }
+            else
+            {
+                <p>
+                    @Html.Label("Question Text: " + Model.question.questiontext)
+                    @Html.Label(" Question ID: " + Model.question.questionid)<br />
+                    @Html.Label("Question Type: " + Server.HtmlEncode(Model.question.answertype))<br />
+                    @Html.Label("Question Recording:")<br />
+                    @Html.Encode(Model.question.questionrecording)<br />
+                </p>
+                if (Model?.question.questionrecording != null && Model.question.questionrecording.Length > 0)
+                {
+                    <p>
+                        <audio controls>
+                            <source src="@Model.question.questionrecording" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </p>
+                }
+                <p>
+                    @Html.Label("Instructions Recording:")<br />
+                    @Html.Encode(Model.question.instructionrecording)
+                </p>
+                if (Model?.question.instructionrecording != null && Model.question.instructionrecording.Length > 0)
+                {
+                    <p>
+                        <audio controls>
+                            <source src="@Model.question.instructionrecording" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </p>
+                }
+                <p>
+                    @Html.Label("Validation Recording:")<br />
+                    @Html.Encode(Model.question.validationrecording)
+                </p>
+                if (Model?.question.validationrecording != null && Model.question.validationrecording.Length > 0)
+                {
+                    <p>
+                        <audio controls>
+                            <source src="@Model.question.validationrecording" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </p>
+                }
+                @Html.Label("Recording File Name: ")<br />
+                @Html.Encode(Model.question.answerrecordingfilename)
+
+                @Html.HiddenFor(x => Model.question.questionid)
+            }
+        }
+        <p>&nbsp;</p>
+        <p>
+            @Html.Partial("_Btn_BackToUnitMainPage")
+            @Html.Partial("_Btn_BackToHomePage")
+        </p>
+    }
+</div>
+

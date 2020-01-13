@@ -1,0 +1,38 @@
+﻿@model ScreeningTesterWebSite.Models.InputFrontPage
+
+@{
+    ViewBag.Title = "Login To First Advantage Screening Tester";
+}
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    @using (Html.BeginForm("HomePage", "Home", FormMethod.Post))
+    {
+        <form>
+            <div>
+                <p>
+                    @Html.Label("Environment")<br />
+                    @Html.DropDownListFor(model => Model.EnvironCode, Model.EnvironmentOptions)
+                </p>
+                <p>
+                    @Html.Label("Language")<br />
+                    @Html.DropDownListFor(model => Model.LanguageID, Model.LaunguageIDOptions)
+                </p>
+                <p>
+                    @Html.Label("Leave entries blank to use default credentials")
+                </p>
+                <p>
+                    @Html.Label("User Name")<br />
+                    @Html.TextBoxFor(model => Model.UserName)
+                </p>
+                <p>
+                    @Html.Label("Password")<br />
+                    @Html.TextBoxFor(model => Model.UserPW)
+                </p>
+                <p>
+                    <input type="submit" value="Login">
+                </p>
+            </div>
+        </form>
+    }
+</div>

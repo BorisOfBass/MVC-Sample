@@ -1,0 +1,81 @@
+﻿@model ScreeningTesterWebSite.Models.InputHireApplicants
+
+@{
+    ViewBag.Title = "HireApplicants method Set-Up";
+}
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+
+    @using (Html.BeginForm("HireApplicantsResults", "PWSUnitTest", FormMethod.Post))
+    {
+        <form>
+            <div>
+                <p>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+
+                    @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+                    @Html.Label("Language: " + Model.LanguageDescription)<br />
+                    @Html.Label("CoID: " + Model.CoID)<br />
+                    @Html.Label("LoID: " + Model.LoID)
+                </p>
+                <p>
+                    @Html.Label("SSN ") <br />
+                    @Html.TextBoxFor(model => Model.ssn)
+                </p>
+                <p>
+                    @Html.Label("EmID") <br />
+                    @Html.TextBoxFor(model => Model.EmID)
+                </p>
+                <p>
+                    @Html.Label("Candidate ID") <br />
+                    @Html.TextBoxFor(model => Model.CandidateID)
+                </p>
+                <p>
+                    @Html.Label("Full Name (First MI Last")) <br />
+                    @Html.TextBoxFor(model => Model.fname) &nbsp;
+                    @Html.TextBoxFor(model => Model.mi) &nbsp;
+                    @Html.TextBoxFor(model => Model.lname)
+                </p>
+                <p>
+                    @Html.Label("Birth Date (yyyy-mm-dd or mm/dd/yyy format)") <br />
+                    @Html.TextBoxFor(model => Model.birthdate)
+                </p>
+                <p>
+                    @Html.Label("Street Address") <br />
+                    @Html.TextBoxFor(model => Model.address)
+                </p>
+                <p>
+                    @Html.Label("City ") <br />
+                    @Html.TextBoxFor(model => Model.city)
+                </p>
+                <p>
+                    @Html.Label("State (enter 2 character code)") <br />
+                    @Html.TextBoxFor(model => Model.state)
+                </p>
+                <p>
+                    @Html.Label("Zip ") <br />
+                    @Html.TextBoxFor(model => Model.zip)
+                </p>
+                <p>
+                    @Html.Label("Hire Date (yyyy-mm-dd or mm/dd/yyy format)") <br />
+                    @Html.TextBoxFor(model => Model.hiredate)
+                </p>
+                <p>
+                    @Html.Label("Start Date (yyyy-mm-dd or mm/dd/yyy format)") <br />
+                    @Html.TextBoxFor(model => Model.startdate)
+                </p>
+                <p>
+                    <button type="submit">Next</button>
+                </p>
+            </div>
+        </form>
+    }
+    @Html.Partial("_Btn_BackToUnitMainPage")
+    @Html.Partial("_Btn_BackToHomePage")
+</div>

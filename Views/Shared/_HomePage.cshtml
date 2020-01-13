@@ -1,0 +1,48 @@
+﻿@model ScreeningTesterWebSite.Models.InputFrontPage
+
+<div class="col-md-12">
+    <h2>@ViewBag.Title</h2>
+    @using (Html.BeginForm("NavigateFromHomePage", "Home", FormMethod.Post))
+    {
+        <form>
+            <div>
+                @Html.HiddenFor(model => Model.UserName)
+                @Html.HiddenFor(model => Model.UserPW)
+                @Html.HiddenFor(model => Model.EnvironCode)
+                @Html.HiddenFor(model => Model.EmID)
+                @Html.HiddenFor(model => Model.LanguageID)
+
+                @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+                @Html.Label("Language: " + Model.LanguageDescription)
+                <p>
+                    @Html.Label("COID")<br />
+                    @Html.TextBoxFor(model => Model.CoID)
+                </p>
+                <p>
+                    @Html.Label("LOID")<br />
+                    @Html.TextBoxFor(model => Model.LoID)
+                </p>
+                
+                <p>&nbsp;</p>
+                <p>
+                    <input type="submit" name="unitmode" value="Unit Test Page">
+                </p>
+                @if (Model.EnvironCode.Substring(0, 1) != "I")
+                {
+                    <p>&nbsp;</p>
+                    <p>
+                        <input type="submit" name="fullmode" value="Full Screening Test">
+                    </p>
+                }
+                @if (Model.EnvironCode.Substring(0, 1) == "I")
+                {
+                    <p>&nbsp;</p>
+                    <p>
+                        <input type="submit" name="ivrmode" value="IVR Full Screening Test">
+                    </p>
+                }
+            </div>
+        </form>
+    }
+</div>
+

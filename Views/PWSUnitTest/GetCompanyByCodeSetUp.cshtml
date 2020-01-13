@@ -1,0 +1,55 @@
+﻿@model ScreeningTesterWebSite.Models.InputGetCompanyByCode
+
+@{
+    ViewBag.Title = "GetCompanyByCode method Set-Up";
+}
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+    @using (Html.BeginForm("GetCompanyByCodeResults", "PWSUnitTest", FormMethod.Post))
+    {
+        <form>
+            <div class="col-md-12">
+                <p>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+
+                    @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+                    @Html.Label("Language: " + Model.LanguageDescription)<br />
+                    @Html.Label("CoID: " + Model.CoID)<br />
+                    @Html.Label("LoID: " + Model.LoID)
+                </p>
+                @{
+                    if (Model.ReturnedErrorText != null)
+                    {
+                        @Html.Label(Model.ReturnedErrorText, "Error Message = " + Server.HtmlEncode(Model.ReturnedErrorText))<br />
+                    }
+                    else
+                    {
+                        <p>
+                            @Html.Label("externalid") <br />
+                            @Html.TextBoxFor(model => Model.CandidateID)
+                        </p>
+                        <p>
+                            @Html.Label("Incoming Phone Number") <br />
+                            @Html.TextBoxFor(model => Model.phonenumber)
+                        </p>
+                        <p>
+                            @Html.Label("Override Code") <br />
+                            @Html.TextBoxFor(model => Model.overridecode)
+                        </p>
+                        <p>
+                            <button type="submit">Next</button>
+                        </p>
+                    }
+                }
+            </div>
+        </form>
+    }
+    @Html.Partial("_Btn_BackToHomePage")
+</div>
+

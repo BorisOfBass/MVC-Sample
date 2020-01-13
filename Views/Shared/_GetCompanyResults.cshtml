@@ -1,0 +1,38 @@
+﻿@model ScreeningTesterWebSite.Models.InputIVRNewApplicant
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+    @{
+        <p>
+            @Html.HiddenFor(model => Model.UserName)
+            @Html.HiddenFor(model => Model.UserPW)
+            @Html.HiddenFor(model => Model.CoID)
+            @Html.HiddenFor(model => Model.LoID)
+            @Html.HiddenFor(model => Model.EnvironCode)
+            @Html.HiddenFor(model => Model.EmID)
+            @Html.HiddenFor(model => Model.LanguageID)
+
+            @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+            @Html.Label("Language: " + Model.LanguageDescription)<br />
+            @Html.Label("LoID: " + Model.LoID)<br />
+        </p>
+        <p>
+            @Html.Label("CompanyID: " + Model.CoID)<br />
+            @Html.Label("Action: " + Model.action)<br />
+            @Html.Label("Re-Direct URL: " + Model.redirecturl)<br />
+            @Html.Label("Recording File: ")<br />
+            @Html.Encode(Model.recordingfile)
+        </p>
+        <p>
+            <audio controls>
+                <source src="@Model.recordingfile" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </p>
+        <p>&nbsp;</p>
+        <p>
+            @Html.Partial("_Btn_BackToUnitMainPage")
+            @Html.Partial("_Btn_BackToHomePage")
+        </p>
+    }
+</div>

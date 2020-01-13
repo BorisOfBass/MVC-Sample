@@ -1,0 +1,109 @@
+﻿@model ScreeningTesterWebSite.Models.NewApplicantOutput
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+    <h4>Retrieves Next Question Set or Ends</h4>
+    @{
+        @Html.HiddenFor(model => Model.LanguageID)
+        @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+        @Html.Label("Language: " + Model.LanguageDescription)<br />
+        @Html.Label("CoID: " + Model.CoID)<br />
+        @Html.Label("LoID: " + Model.LoID)<br />
+        if (Model.EmID != null)
+        {
+            @Html.Label("EmID (id) = " + Server.HtmlEncode(Model.EmID))<br />
+        }
+        if (Model.CandidateID != null)
+        {
+            @Html.Label("CandidateID (externalid) = " + Server.HtmlEncode(Model.CandidateID))<br />
+        }
+        <P></P>
+        if (Model.ReturnedErrorText != null)
+        {
+            @Html.Label(Model.ReturnedErrorText, "Error Message = " + Server.HtmlEncode(Model.ReturnedErrorText))<br />
+        }
+        else
+        {
+            int ctr = 0;
+            if (Model?.questions == null || Model.questions.Count < 1)
+            {
+                @Html.Label("No Questions")
+            }
+            else
+            {
+                for (int i = 0; i < Model.questions.Count; i++)
+                {
+                    @Html.Label(Model.questions[i].text, Model.questions[i].text)<br />
+                    @Html.TextBoxFor(x => Model.questions[i].answervalue)
+                    @Html.Label(" Question ID: " + Server.HtmlEncode(Model.questions[i].id))
+                    @Html.Label(", Question Type: " + Server.HtmlEncode(Model.questions[i].answertype))<br />
+                    @Html.Label("Is Required flag: " + Model.questions[i].isrequired)
+                    @Html.Label(", Can Skip flag: " + Model.questions[i].canskip)<br />
+                    @Html.Label("Previous Answer: " + Model.questions[i].previousanswer)
+                    @Html.HiddenFor(x => Model.questions[i].id)
+
+                    if (Model.questions[i]?.validvaluelist != null)
+                    {
+                        foreach (string validval in Model.questions[i].validvaluelist)
+                        {
+                            <br />
+                            @Html.Label(validval, "Valid Answer = " + Server.HtmlEncode(validval))
+                        }
+                    }
+                    <p></p>
+                }
+            }
+            <P></P>
+            ctr = 0;
+            if (Model?.statuses == null || Model.statuses.Count < 1)
+            {
+                @Html.Label("No Status returned")
+            }
+            else
+            {
+                foreach (var stat in Model.statuses)
+                {
+                    @Html.Label("Status " + ctr.ToString())<br />
+                    @Html.Label("Process Step = " + stat.processstep)<br />
+                    @Html.Label("Status = " + stat.statuscode)<P></P>
+                    ctr++;
+                }
+            }
+            <P></P>
+            ctr = 0;
+            if (Model?.credits == null || Model.credits.Count < 1)
+            {
+                @Html.Label("No Credits")
+            }
+            else
+            {
+                foreach (var crdt in Model.credits)
+                {
+                    @Html.Label("Credit " + ctr.ToString())<br />
+                    @Html.Label("Credit Type = " + crdt.credittype)<br />
+                    @Html.Label("qualified = " + crdt.qualified)<P></P>
+                    ctr++;
+                }
+            }
+            <P></P>
+            ctr = 0;
+            if (Model?.forms == null || Model.forms.Count < 1)
+            {
+                @Html.Label("No Forms")
+            }
+            else
+            {
+                foreach (var frm in Model.forms)
+                {
+                    @Html.Label("Form " + ctr.ToString())<br />
+                    @Html.Label("Form ID = " + frm.formid.ToString())<br />
+                    @Html.Label("Form Name = " + frm.formname)<P></P>
+                    ctr++;
+                }
+            }
+        }
+        <p>&nbsp;</p>
+        @Html.Partial("_Btn_BackToUnitMainPage")
+        @Html.Partial("_Btn_BackToHomePage")
+    }
+</div>

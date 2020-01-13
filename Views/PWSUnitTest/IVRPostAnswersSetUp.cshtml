@@ -1,0 +1,59 @@
+﻿@model ScreeningTesterWebSite.Models.InputIVRPostAnswers
+
+@{
+    ViewBag.Title = "IVRPostAnswers method Set-Up";
+}
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+
+    @using (Html.BeginForm("IVRPostAnswersResults", "PWSUnitTest", FormMethod.Post))
+    {
+        <form>
+            <div>
+                <p>
+                    @Html.HiddenFor(model => Model.UserName)
+                    @Html.HiddenFor(model => Model.UserPW)
+                    @Html.HiddenFor(model => Model.CoID)
+                    @Html.HiddenFor(model => Model.LoID)
+                    @Html.HiddenFor(model => Model.EnvironCode)
+                    @Html.HiddenFor(model => Model.LanguageID)
+
+                    @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+                    @Html.Label("Language: " + Model.LanguageDescription)<br />
+                    @Html.Label("CoID: " + Model.CoID)<br />
+                    @Html.Label("LoID: " + Model.LoID)
+                </p>
+                <p>
+                    @Html.Label("External ID (Call ID)") <br />
+                    @Html.TextBoxFor(x => Model.CandidateID)
+                </p>
+                <p></p>
+                @Html.Label("Question ID | Answer Text")
+                <br />
+                @{
+                    for (int ctr = 0; ctr < 1; ctr++)
+                    {
+                        @Html.TextBoxFor(x => Model.answers[ctr].questionid);
+                        @Html.TextBoxFor(x => Model.answers[ctr].answervalue);
+                        <p></p>
+                    }
+                }
+                <p></p>
+                @{
+                    for (int ctr = 0; ctr < Model.IVRPostAnswersNotes.Count; ctr++)
+                    {
+                        @Html.Label(Model.IVRPostAnswersNotes[ctr]);
+                        <br />
+                    }
+                }
+                <p>
+                    <button type="submit">Next</button>
+                </p>
+            </div>
+        </form>
+                    }
+    @Html.Partial("_Btn_BackToUnitMainPage")
+    @Html.Partial("_Btn_BackToHomePage")
+</div>
+

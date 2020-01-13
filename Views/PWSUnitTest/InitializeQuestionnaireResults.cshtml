@@ -1,0 +1,41 @@
+﻿@model ScreeningTesterWebSite.Models.InitializeQuestionnaireOutput
+
+@{
+    ViewBag.Title = "InitializeQuestionnaire Results";
+}
+
+<div class="col-md-12">
+    <h3>@ViewBag.Title</h3>
+    @{
+        @Html.HiddenFor(model => Model.LanguageID)
+
+        @Html.Label("Environment: " + Model.EnvironmentDescription)<br />
+        @Html.Label("Language: " + Model.LanguageDescription)<br />
+        @Html.Label("CoID: " + Model.CoID)<br />
+        @Html.Label("LoID: " + Model.LoID)<br />
+        @Html.Label("Candidate (externalid) = " + Server.HtmlEncode(Model.CandidateID))<br />
+        <P></P>
+        if (Model.ReturnedErrorText != null)
+        {
+            @Html.Label(Model.ReturnedErrorText, "Error Message = " + Server.HtmlEncode(Model.ReturnedErrorText))<br />
+        }
+        else
+        {
+            <p>
+                <B>@Html.Label("Opt-Out Text:")</B>
+                @Html.DisplayFor(x => Model.optouttext)
+            </p>
+
+            <B>@Html.Label("Normalized Address:")</B><br />
+            @Html.Label(Model.address)<br />
+            @Html.Label(Model.city + ", " + Model.state + " " + Model.zip)
+        }
+        <p>&nbsp;</p>
+        @Html.Partial("_Btn_BackToUnitMainPage")
+        @Html.Partial("_Btn_BackToHomePage")      
+    }
+</div>
+
+
+
+

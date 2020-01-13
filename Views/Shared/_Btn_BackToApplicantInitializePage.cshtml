@@ -1,0 +1,21 @@
+﻿@model ScreeningTesterWebSite.Models.ModelBase
+
+@{
+    <p>
+        @Html.ActionLink(
+                 linkText: "Back To IVR Initialize Page",
+                 actionName: "CompanyIDAndLOIDLookupReturn",
+                 controllerName: "IVRFullScreening",
+                 routeValues: new
+                 {
+                     coID = Model.CoID,
+                     loID = Model.LoID,
+                     envCode = Model.EnvironCode,
+                     languageid = Model.LanguageID,
+                     block = Model.EncryptedUserName,
+                     section = Model.EncryptedUserPW
+                 },
+                 htmlAttributes: null
+                     )
+    </p>
+    }
